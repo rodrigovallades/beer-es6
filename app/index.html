@@ -14,14 +14,15 @@
 </head>
 
 <body>
-
-  <div class="address">
-    <label class="address__title" for="search_address">Delivery Address</label>
-    <div class="address__input-group">
-      <input type="text" name="address" id="search_address" class="address__input" required="" title="" placeholder="Type your address" />
+  <div class="wrapper">
+    <div class="address">
+      <label class="address__title" for="search_address">Delivery Address</label>
+      <div class="address__input-group">
+        <input type="text" name="address" id="search_address" class="address__input" required="" title="" placeholder="Type your address" onkeyup="BeerLocator.searchHandler(event, this)" />
+      </div>
     </div>
   </div>
-
+  <div id="map"></div>
   <!-- build:js assets/scripts/app.js -->
   <script src="temp/scripts/app.js"></script>
   <!-- endbuild -->
