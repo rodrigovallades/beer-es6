@@ -1,3 +1,10 @@
-#map {  
-  flex: 1;
+#map {
+  display: block;
+  height: 300px;
+
+  @mixin atMedium {
+    height: auto;
+    display: flex;
+    flex: 1;
+  }
 }

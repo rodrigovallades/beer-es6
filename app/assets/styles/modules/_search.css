@@ -1,5 +1,11 @@
 .address {
   flex: 0 0 400px;
+  margin-bottom: 20px;
+
+  @mixin atMedium {
+    margin-bottom: 0;
+    margin-right: 20px;
+  }
 
   &__title {
     text-transform: uppercase;
