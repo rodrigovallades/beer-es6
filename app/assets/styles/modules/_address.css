@@ -42,4 +42,32 @@
       content: "\f3c5";
     }
   }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__list-item {
+    position: relative;
+    background-color: $verySubtleGrey;
+    border-radius: $borderRadius;
+    font-size: 1rem;
+    line-height: 1.4em;
+    padding: 6px 6px 6px 35px;
+  }
+
+  &__list-item::before {
+    font-size: 1.3rem;
+    display: block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    top: 0;
+    left: 0;
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    content: "\f3c5";
+  }
 }

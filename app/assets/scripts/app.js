@@ -4,7 +4,9 @@ const gMap = new GoogleMaps()
 
 class BeerLocator {
 
-  constructor() {}
+  constructor() {
+    this.address = {};
+  }
 
   onLoad() {
     window.initMap = gMap.initMap;
@@ -17,9 +19,12 @@ class BeerLocator {
       gMap.getAddressLocation()
       .then(res => res.json())
       .then(data => {
-        const location = data.results[0].geometry.location
-        console.log(data.results)
+        const location = data.results[0].geometry.location;
+        console.log(data.results);
         gMap.addMarkers([{lat: location.lat, lng: location.lng}])
+
+        this.address = data.results[0];
+        this.renderAddress();
       })
     } else if (e.key === 'Escape') {
       this.clear(input)
@@ -30,6 +35,15 @@ class BeerLocator {
     input.value = ''
     gMap.clearMarkers()
     gMap.initBrazil()
+  }
+
+  renderAddress() {
+    const addressResults = document.querySelector('.address__results')
+    addressResults.innerHTML = `
+      <ul class='address__list'>
+        <li class='address__list-item'>${this.address.formatted_address}</li>
+      </ul>
+    `
   }
 }
 
