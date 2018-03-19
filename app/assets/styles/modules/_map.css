@@ -5,6 +5,6 @@
   @mixin atMedium {
     height: auto;
     display: flex;
-    flex: 1;
+    flex: 1 10 75%;
   }
 }
