@@ -12,18 +12,26 @@ class BeerLocator {
     gMap.init()
   };
 
-  searchHandler(e, el) {
+  searchHandler(e, input) {
     if (e.keyCode === 13 || e.key === `Enter`) {
       gMap.getAddressLocation()
+      .then(res => res.json())
+      .then(data => {
+        const location = data.results[0].geometry.location
+        console.log(data.results)
+        gMap.addMarkers([{lat: location.lat, lng: location.lng}])
+      })
     } else if (e.key === 'Escape') {
-      this.clear(el)
+      this.clear(input)
     }
   }
 
-  clear(el) {
-    el.value = ''
+  clear(input) {
+    input.value = ''
+    gMap.clearMarkers()
+    gMap.initBrazil()
   }
 }
 
 window.BeerLocator = new BeerLocator()
-document.addEventListener('DOMContentLoaded', BeerLocator.onLoad)
+document.addEventListener('DOMContentLoaded', window.BeerLocator.onLoad)

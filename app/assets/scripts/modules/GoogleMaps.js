@@ -17,41 +17,53 @@ class GoogleMaps {
 
   initMap() {
     this.map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 8
+      center: {lat: -14.235004, lng: -51.92528}, // brasil
+      zoom: 5
     });
   }
 
-  plotMarkers(m) {
-    this.markers = [];
-    this.bound = new google.maps.LatLngBounds();
+  initBrazil() {
+    map.setOptions({
+      center: {lat: -14.235004, lng: -51.92528}, // brasil
+      zoom: 5
+    });
+  }
 
-    m.forEach(function (marker) {
-      var position = new google.maps.LatLng(marker.lat, marker.lng);
+  clearMarkers() {
+    this.markers.forEach(marker => marker.setMap(null) );
+  }
 
-      this.markers.push(
+  addMarkers(m) {
+    this.clearMarkers()
+    this.bounds = new google.maps.LatLngBounds();
+
+    const self = this;
+    m.forEach(marker => {
+      let position = new google.maps.LatLng(marker.lat, marker.lng);
+
+      self.markers.push(
         new google.maps.Marker({
           position: position,
           map: map,
-          animation: google.maps.Animation.DROP
+          animation: google.maps.Animation.xo
         })
       );
 
-      this.bound.extend(position);
+      self.bounds.extend(position);
     });
 
-    map.fitBounds(this.bound);
+    map.fitBounds(this.bounds);
+    map.setOptions({
+      zoom: 18
+    });
   }
 
   getAddressLocation() {
     let address = document.getElementById('search_address').value;
     if (address) {
-      fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o&address=${address}`)
-        .then(res => { console.log(res) });
-    } else {
-      console.log('no address');
+      return fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o&address=${address}`)
     }
   }
-
 }
 
 export default GoogleMaps
