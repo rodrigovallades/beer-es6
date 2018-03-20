@@ -27,6 +27,8 @@ class BeerLocator {
 
           if (!data.results.length) {
             this.renderAddress('Address not found.');
+            gMap.clearMarkers();
+            gMap.initBrazil();
             return
           }
 
