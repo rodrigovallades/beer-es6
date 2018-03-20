@@ -1,12 +1,11 @@
 import GoogleMaps from './modules/GoogleMaps';
+import Queries from './modules/Queries';
 import Loader from './modules/Loader';
-import { createApolloFetch } from 'apollo-fetch';
 
 class BeerLocator {
 
   constructor() {
     this.address = {};
-    this.graphql_api = 'https://803votn6w7.execute-api.us-west-2.amazonaws.com/dev/public/graphql';
     this.addressResults = document.querySelector('.address__results');
     this.productsList = document.querySelector('.products');
   }
@@ -23,7 +22,7 @@ class BeerLocator {
     if (address && (e.keyCode === 13 || e.key === `Enter`)) {
       loader.block();
       this.clearSearchResults();
-      gMap.getAddressLocation(address)
+      query.getAddressLocation(address)
         .then(res => res.json())
         .then(data => {
           loader.unblock();
@@ -38,8 +37,29 @@ class BeerLocator {
 
           this.renderAddress(this.address.formatted_address);
 
-          // fetch GraphQL api
-          this.getPOC(location);
+          loader.block();
+          // fetch GraphQL POC api
+          query.getPOC(location)
+            .then(res => {
+              loader.unblock();
+
+              console.log(`GraphQL pocSearchMethod:`);
+              console.log(res.data);
+
+              if (res.data.pocSearch.length) {
+                loader.block();
+                // fetch GraphQL products api
+                query.getBeers(res.data.pocSearch[0].id)
+                  .then(res => {
+                    loader.unblock();
+                    if (res.data.poc.products.length) {
+                      this.renderProducts(res.data.poc.products);
+                    }
+                    console.log(`GraphQL pocCategorySearch:`);
+                    console.log(res.data);
+                  });
+              }
+            });
 
           console.log(`Google maps API:`);
           console.log(data.results);
@@ -49,117 +69,6 @@ class BeerLocator {
       this.clearInput(input);
       this.clearSearchResults();
     }
-  }
-
-  getPOC(location) {
-    loader.block();
-    const fetch = createApolloFetch({
-      uri: this.graphql_api,
-    });
-
-    const date = new Date();
-    date.toISOString();
-
-    fetch({
-      query: `query pocSearchMethod($now: DateTime!, $algorithm: String!, $lat: String!, $long: String!) {
-        pocSearch(now: $now, algorithm: $algorithm, lat: $lat, long: $long) {
-          __typename
-          id
-          status
-          tradingName
-          officialName
-          deliveryTypes {
-            __typename
-            pocDeliveryTypeId
-            deliveryTypeId
-            price
-            title
-            subtitle
-            active
-          }
-          paymentMethods {
-            __typename
-            pocPaymentMethodId
-            paymentMethodId
-            active
-            title
-            subtitle
-          }
-          pocWorkDay {
-            __typename
-            weekDay
-            active
-            workingInterval {
-              __typename
-              openingTime
-              closingTime
-            }
-          }
-          address {
-            __typename
-            address1
-            address2
-            number
-            city
-            province
-            zip
-            coordinates
-          }
-          phone {
-            __typename
-            phoneNumber
-          }
-        }
-      }`,
-      variables: {
-        "algorithm": "NEAREST",
-        "lat": location.lat,
-        "long": location.lng,
-        "now": date
-      }
-    }).then(res => {
-      loader.unblock();
-
-      console.log(`GraphQL pocSearchMethod:`);
-      console.log(res.data);
-
-      if (res.data.pocSearch.length) {
-        this.getBeers(res.data.pocSearch[0].id);
-      }
-    });
-  }
-
-  getBeers(pocId) {
-    loader.block();
-    const fetch = createApolloFetch({
-      uri: this.graphql_api,
-    });
-    fetch({
-      query: `query pocCategorySearch($id: ID!, $search: String!, $categoryId: Int!) {
-        poc(id: $id) {
-          products(categoryId: $categoryId, search: $search) {
-            productVariants{
-              title
-              description
-              imageUrl
-              price
-            }
-          }
-        }
-      }`,
-      variables: {
-        "id": pocId,
-        "search": "",
-        "categoryId": 0
-      }
-    }).then(res => {
-      loader.unblock();
-      if (res.data.poc.products.length) {
-        this.renderProducts(res.data.poc.products);
-      }
-      console.log(`GraphQL pocCategorySearch:`);
-      console.log(res.data);
-    });
   }
 
   clearInput(input) {
@@ -207,6 +116,7 @@ class BeerLocator {
 
 const gMap = new GoogleMaps();
 const loader = new Loader();
+const query = new Queries();
 window.BeerLocator = new BeerLocator();
 
 document.addEventListener('DOMContentLoaded', window.BeerLocator.onLoad);

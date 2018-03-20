@@ -52,10 +52,6 @@ class GoogleMaps {
       zoom: 18
     });
   }
-
-  getAddressLocation(address) {
-    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o&address=${address}`);
-  }
 }
 
 export default GoogleMaps
