@@ -16,8 +16,6 @@ class Loader {
   }
 
   render() {
-    //var l = document.createElement("div");
-    //l.innerHTML = this.template
     document.body.insertAdjacentHTML('beforeend', this.template);
   }
 

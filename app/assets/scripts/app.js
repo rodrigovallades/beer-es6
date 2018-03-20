@@ -2,14 +2,11 @@ import GoogleMaps from './modules/GoogleMaps';
 import Loader from './modules/Loader';
 import { createApolloFetch } from 'apollo-fetch';
 
-const gMap = new GoogleMaps()
-const loader = new Loader()
-
 class BeerLocator {
 
   constructor() {
     this.address = {};
-    this.graphql_api = 'https://803votn6w7.execute-api.us-west-2.amazonaws.com/dev/public/graphql'
+    this.graphql_api = 'https://803votn6w7.execute-api.us-west-2.amazonaws.com/dev/public/graphql';
     this.addressResults = document.querySelector('.address__results');
     this.productsList = document.querySelector('.products');
   }
@@ -18,14 +15,14 @@ class BeerLocator {
     // global - accessible to gmaps api
     window.initOptions = gMap.initOptions;
     window.initMap = gMap.initMap;
-    gMap.init()
+    gMap.init();
   };
 
   searchHandler(e, input) {
     let address = document.getElementById('search_address').value;
     if (address && (e.keyCode === 13 || e.key === `Enter`)) {
       loader.block();
-      this.clearSearchResults()
+      this.clearSearchResults();
       gMap.getAddressLocation(address)
         .then(res => res.json())
         .then(data => {
@@ -49,8 +46,8 @@ class BeerLocator {
         })
         .catch()
     } else if (e.key === 'Escape' && !loader.loading) {
-      this.clearInput(input)
-      this.clearSearchResults()
+      this.clearInput(input);
+      this.clearSearchResults();
     }
   }
 
@@ -127,7 +124,7 @@ class BeerLocator {
       console.log(res.data);
 
       if (res.data.pocSearch.length) {
-        this.getBeers(res.data.pocSearch[0].id)
+        this.getBeers(res.data.pocSearch[0].id);
       }
     });
   }
@@ -158,7 +155,7 @@ class BeerLocator {
     }).then(res => {
       loader.unblock();
       if (res.data.poc.products.length) {
-        this.renderProducts(res.data.poc.products)
+        this.renderProducts(res.data.poc.products);
       }
       console.log(`GraphQL pocCategorySearch:`);
       console.log(res.data);
@@ -166,9 +163,9 @@ class BeerLocator {
   }
 
   clearInput(input) {
-    input.value = ''
-    gMap.clearMarkers()
-    gMap.initBrazil()
+    input.value = '';
+    gMap.clearMarkers();
+    gMap.initBrazil();
   }
 
   clearSearchResults() {
@@ -177,12 +174,12 @@ class BeerLocator {
   }
 
   clearAddress() {
-    console.log(`[Address cleared]`)
+    console.log(`[Address cleared]`);
     this.addressResults.innerHTML = ``;
   }
 
   clearProducts() {
-    console.log(`[Products cleared]`)
+    console.log(`[Products cleared]`);
     this.productsList.innerHTML = ``;
   }
 
@@ -191,7 +188,7 @@ class BeerLocator {
       <ul class='address__list'>
         <li class='address__list-item'>${address}</li>
       </ul>
-    `
+    `;
   }
 
   renderProducts(products) {
@@ -201,12 +198,15 @@ class BeerLocator {
       let p = product.productVariants[0];
       productsHtml += `
         <div class='products__item'>${p.title}</div>
-      `
-    })
+      `;
+    });
 
-    this.productsList.innerHTML = productsHtml
+    this.productsList.innerHTML = productsHtml;
   }
 }
 
-window.BeerLocator = new BeerLocator()
-document.addEventListener('DOMContentLoaded', window.BeerLocator.onLoad)
+const gMap = new GoogleMaps();
+const loader = new Loader();
+window.BeerLocator = new BeerLocator();
+
+document.addEventListener('DOMContentLoaded', window.BeerLocator.onLoad);

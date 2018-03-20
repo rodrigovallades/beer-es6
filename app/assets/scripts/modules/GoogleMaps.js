@@ -11,7 +11,7 @@ class GoogleMaps {
     if (document.querySelectorAll('#map').length > 0) {
       let js_file = document.createElement('script');
       js_file.type = 'text/javascript';
-      js_file.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o&callback=initMap'
+      js_file.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o&callback=initMap';
       document.getElementsByTagName('head')[0].appendChild(js_file);
     }
   }
@@ -54,7 +54,7 @@ class GoogleMaps {
   }
 
   getAddressLocation(address) {
-    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o&address=${address}`)
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o&address=${address}`);
   }
 }
 
