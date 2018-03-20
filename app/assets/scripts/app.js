@@ -9,6 +9,7 @@ class BeerLocator {
 
   constructor() {
     this.address = {};
+    this.graphql_api = 'https://803votn6w7.execute-api.us-west-2.amazonaws.com/dev/public/graphql'
   }
 
   onLoad() {
@@ -47,7 +48,7 @@ class BeerLocator {
   getPOC(location) {
     loader.block();
     const fetch = createApolloFetch({
-      uri: 'https://803votn6w7.execute-api.us-west-2.amazonaws.com/dev/public/graphql',
+      uri: this.graphql_api,
     });
 
     const date = new Date();
@@ -109,10 +110,46 @@ class BeerLocator {
         "lat": location.lat,
         "long": location.lng,
         "now": date
-      },
+      }
     }).then(res => {
       loader.unblock();
-      console.log(`GraphQL POC:`);
+      console.log(`GraphQL pocSearchMethod:`);
+      console.log(res.data);
+      if (res.data.pocSearch.length) {
+        this.getBeers(res.data.pocSearch[0].id)
+      }
+    });
+  }
+
+  getBeers(pocId) {
+    loader.block();
+    const fetch = createApolloFetch({
+      uri: this.graphql_api,
+    });
+    fetch({
+      query: `query pocCategorySearch($id: ID!, $search: String!, $categoryId: Int!) {
+        poc(id: $id) {
+          products(categoryId: $categoryId, search: $search) {
+            productVariants{
+              title
+              description
+              imageUrl
+              price
+            }
+          }
+        }
+      }`,
+      variables: {
+        "id": pocId,
+        "search": "",
+        "categoryId": 0
+      }
+    }).then(res => {
+      loader.unblock();
+      if (res.data.poc.products.length) {
+        this.renderProducts(res.data.poc.products)
+      }
+      console.log(`GraphQL pocCategorySearch:`);
       console.log(res.data);
     });
   }
@@ -130,6 +167,20 @@ class BeerLocator {
         <li class='address__list-item'>${address}</li>
       </ul>
     `
+  }
+
+  renderProducts(products) {
+    const productsList = document.querySelector('.products');
+    let productsHtml = '';
+
+    products.map(product => {
+      let p = product.productVariants[0];
+      productsHtml += `
+        <div class='products__item'>${p.title}</div>
+      `
+    })
+
+    productsList.innerHTML = productsHtml
   }
 }
 
