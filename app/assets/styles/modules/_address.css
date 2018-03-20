@@ -1,10 +1,8 @@
 .address {
-  flex: 1 0 35%;
-  margin-bottom: 20px;
+  padding: 0 20px 20px 20px;
 
   @mixin atMedium {
-    margin-bottom: 0;
-    margin-right: 25px;
+    flex: 1 0 35%;
   }
 
   &__title {

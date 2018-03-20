@@ -1,0 +1,11 @@
+.footer {
+  background-color: yellow;
+  height: 100px;
+  width: 100%;
+  position: relative;  
+
+  @mixin atMedium {
+    position: fixed;
+    bottom: 0;
+  }
+}

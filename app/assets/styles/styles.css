@@ -6,6 +6,8 @@
 @import "modules/layout/_wrapper";
 
 @import "modules/_app";
+@import "modules/_header";
+@import "modules/_footer";
 @import "modules/_address";
 @import "modules/_map";
 @import "modules/_loader";
