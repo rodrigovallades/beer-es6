@@ -23,6 +23,8 @@ class BeerLocator {
     let address = document.getElementById('search_address').value;
     if (address && (e.keyCode === 13 || e.key === `Enter`)) {
       loader.block();
+      this.clearAddress();
+      this.clearProducts();
       gMap.getAddressLocation(address)
         .then(res => res.json())
         .then(data => {
