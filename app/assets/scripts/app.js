@@ -15,6 +15,8 @@ class BeerLocator {
   }
 
   onLoad() {
+    // global - accessible to gmaps api
+    window.initOptions = gMap.initOptions;
     window.initMap = gMap.initMap;
     gMap.init()
   };

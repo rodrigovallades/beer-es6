@@ -4,6 +4,7 @@ class GoogleMaps {
     this.map = null;
     this.markers = [];
     this.bounds = null;
+    this.initOptions = { center: {lat: -14.235004, lng: -51.92528}, zoom: 5 }; // brasil
   }
 
   init() {
@@ -15,18 +16,12 @@ class GoogleMaps {
     }
   }
 
-  initMap() {
-    this.map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -14.235004, lng: -51.92528}, // brasil
-      zoom: 5
-    });
+  initMap(options) {
+    this.map = new google.maps.Map(document.getElementById('map'), this.initOptions);
   }
 
   initBrazil() {
-    map.setOptions({
-      center: {lat: -14.235004, lng: -51.92528}, // brasil
-      zoom: 5
-    });
+    map.setOptions(this.initOptions);
   }
 
   clearMarkers() {
