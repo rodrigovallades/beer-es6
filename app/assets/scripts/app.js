@@ -10,6 +10,8 @@ class BeerLocator {
   constructor() {
     this.address = {};
     this.graphql_api = 'https://803votn6w7.execute-api.us-west-2.amazonaws.com/dev/public/graphql'
+    this.addressResults = document.querySelector('.address__results');
+    this.productsList = document.querySelector('.products');
   }
 
   onLoad() {
@@ -25,6 +27,9 @@ class BeerLocator {
         .then(res => res.json())
         .then(data => {
           loader.unblock();
+
+          if (!data.results.length) { return }
+
           this.address = data.results[0];
 
           // add marker to gMap
@@ -40,8 +45,10 @@ class BeerLocator {
           console.log(data.results);
         })
         .catch()
-    } else if (e.key === 'Escape') {
-      this.clear(input)
+    } else if (e.key === 'Escape' && !loader.loading) {
+      this.clearInput(input)
+      this.clearAddress();
+      this.clearProducts();
     }
   }
 
@@ -113,8 +120,10 @@ class BeerLocator {
       }
     }).then(res => {
       loader.unblock();
+
       console.log(`GraphQL pocSearchMethod:`);
       console.log(res.data);
+
       if (res.data.pocSearch.length) {
         this.getBeers(res.data.pocSearch[0].id)
       }
@@ -154,15 +163,24 @@ class BeerLocator {
     });
   }
 
-  clear(input) {
+  clearInput(input) {
     input.value = ''
     gMap.clearMarkers()
     gMap.initBrazil()
   }
 
+  clearAddress() {
+    console.log(`[Address cleared]`)
+    this.addressResults.innerHTML = ``;
+  }
+
+  clearProducts() {
+    console.log(`[Products cleared]`)
+    this.productsList.innerHTML = ``;
+  }
+
   renderAddress(address) {
-    const addressResults = document.querySelector('.address__results')
-    addressResults.innerHTML = `
+    this.addressResults.innerHTML = `
       <ul class='address__list'>
         <li class='address__list-item'>${address}</li>
       </ul>
@@ -170,7 +188,6 @@ class BeerLocator {
   }
 
   renderProducts(products) {
-    const productsList = document.querySelector('.products');
     let productsHtml = '';
 
     products.map(product => {
@@ -180,7 +197,7 @@ class BeerLocator {
       `
     })
 
-    productsList.innerHTML = productsHtml
+    this.productsList.innerHTML = productsHtml
   }
 }
 
