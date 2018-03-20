@@ -1,0 +1,14 @@
+.content {
+
+  @mixin atMedium {
+    display: flex;
+    flex-direction: row;    
+  }
+
+  &__column--smaller {
+    flex: 3 0 0;
+  }
+  &__column--bigger {
+    flex: 5 0 0;
+  }
+}

@@ -1,11 +1,13 @@
 .footer {
-  background-color: yellow;
+  background-color: $mainAccent;
   height: 100px;
   width: 100%;
-  position: relative;  
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  color: $verySubtleGrey;
 
   @mixin atMedium {
-    position: fixed;
-    bottom: 0;
   }
 }

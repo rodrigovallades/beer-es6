@@ -5,3 +5,6 @@ $darkGrey: #404040;
 $verySubtleGrey: #eee;
 $lightFrame: #fff;
 $borderRadius: 5px;
+
+$flexbox-column-smaller: 35%;
+$flexbox-column-bigger: 65%;

@@ -14,19 +14,23 @@
 </head>
 <body>
   <div class="app">
-
-    <div class="wrapper">
-      <div class="address">
-        <label class="address__title" for="search_address">Delivery Address</label>
-        <div class="address__input-group">
-          <input type="text" name="address" id="search_address" class="address__input" required="" title="" placeholder="Type your address" onkeyup="BeerLocator.searchHandler(event, this)" />
+    <div class="header">BeerLocator [Rodrigo Vallades]</div>
+    <div class="content">
+      <div class="content__column content__column--smaller">
+        <div class="address">
+          <label class="address__title" for="search_address">Delivery Address</label>
+          <div class="address__input-group">
+            <input type="text" name="address" id="search_address" class="address__input" required="" title="" placeholder="Type your address" onkeyup="BeerLocator.searchHandler(event, this)" />
+          </div>
+          <div class="address__results"></div>
+          <div class="products"></div>
         </div>
-        <div class="address__results"></div>
-        <div class="products"></div>
       </div>
-      <div id="map">GoogleMaps</div>
+      <div class="content__column content__column--bigger">
+        <div id="map">GoogleMaps</div>
+      </div>
     </div>
-    
+    <div class="footer">Rodrigo Vallades [rodrigo.vallades@gmail.com]</div>
   </div>
   <!-- build:js assets/scripts/app.js -->
   <script src="temp/scripts/app.js"></script>

@@ -1,10 +1,6 @@
 .address {
   padding: 0 20px 20px 20px;
 
-  @mixin atMedium {
-    flex: 1 0 35%;
-  }
-
   &__title {
     text-transform: uppercase;
     font-weight: 600;
