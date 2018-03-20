@@ -71,6 +71,10 @@
     padding: 1em 130px 1em 45px;
   }
 
+  &__list-item--error {
+    background-color: $subtleErrorBg;
+  }
+
   &__list-item::before {
     font-size: 1.3rem;
     display: block;

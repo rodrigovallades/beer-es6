@@ -25,7 +25,10 @@ class BeerLocator {
         .then(data => {
           loader.unblock();
 
-          if (!data.results.length) { return }
+          if (!data.results.length) {
+            this.renderAddress('Address not found.');
+            return
+          }
 
           this.address = data.results[0];
 
@@ -43,8 +46,10 @@ class BeerLocator {
               console.log(res.data);
 
               if (res.data.pocSearch.length) {
-                this.renderAddress(this.address.formatted_address);
+                this.renderAddress(this.address.formatted_address, true);
                 this.pocSearch = res.data.pocSearch[0];
+              } else {
+                this.renderAddress('No POCs found near this location.');
               }
             });
 
@@ -79,12 +84,22 @@ class BeerLocator {
     this.productsList.innerHTML = ``;
   }
 
-  renderAddress(address) {
-    this.addressResults.innerHTML = `
-      <ul class='address__list'>
-        <li class='address__list-item'>${address}<span class="address__get-beers">Get beers</span></li>
-      </ul>
-    `;
+  renderAddress(message, showBuy) {
+    let template = ``;
+    if (showBuy) {
+      template = `
+        <ul class='address__list'>
+          <li class='address__list-item'>${message}<span class="address__get-beers">Get beers</span></li>
+        </ul>
+      `;
+    } else {
+      template = `
+        <ul class='address__list'>
+          <li class='address__list-item address__list-item--error'>${message}</li>
+        </ul>
+      `;
+    }
+    this.addressResults.innerHTML = template;
   }
 
   renderProducts(products) {

@@ -6,5 +6,7 @@ $verySubtleGrey: #eee;
 $lightFrame: #fff;
 $borderRadius: 5px;
 
+$subtleErrorBg: #efe0e0;
+
 $flexbox-column-smaller: 35%;
 $flexbox-column-bigger: 65%;
