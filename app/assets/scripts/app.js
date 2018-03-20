@@ -23,8 +23,7 @@ class BeerLocator {
     let address = document.getElementById('search_address').value;
     if (address && (e.keyCode === 13 || e.key === `Enter`)) {
       loader.block();
-      this.clearAddress();
-      this.clearProducts();
+      this.clearSearchResults()
       gMap.getAddressLocation(address)
         .then(res => res.json())
         .then(data => {
@@ -49,8 +48,7 @@ class BeerLocator {
         .catch()
     } else if (e.key === 'Escape' && !loader.loading) {
       this.clearInput(input)
-      this.clearAddress();
-      this.clearProducts();
+      this.clearSearchResults()
     }
   }
 
@@ -169,6 +167,11 @@ class BeerLocator {
     input.value = ''
     gMap.clearMarkers()
     gMap.initBrazil()
+  }
+
+  clearSearchResults() {
+    this.clearAddress();
+    this.clearProducts();
   }
 
   clearAddress() {
