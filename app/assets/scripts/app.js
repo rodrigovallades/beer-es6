@@ -1,6 +1,8 @@
 import GoogleMaps from './modules/GoogleMaps'
+import Loader from './modules/Loader'
 
 const gMap = new GoogleMaps()
+const loader = new Loader()
 
 class BeerLocator {
 
@@ -10,22 +12,25 @@ class BeerLocator {
 
   onLoad() {
     window.initMap = gMap.initMap;
-    gMap.getAddressLocation()
     gMap.init()
   };
 
   searchHandler(e, input) {
-    if (e.keyCode === 13 || e.key === `Enter`) {
-      gMap.getAddressLocation()
-      .then(res => res.json())
-      .then(data => {
-        const location = data.results[0].geometry.location;
-        console.log(data.results);
-        gMap.addMarkers([{lat: location.lat, lng: location.lng}])
+    let address = document.getElementById('search_address').value;
+    if (address && (e.keyCode === 13 || e.key === `Enter`)) {
+      loader.block();
+      gMap.getAddressLocation(address)
+        .then(res => res.json())
+        .then(data => {
+          loader.unblock();
+          const location = data.results[0].geometry.location;
+          console.log(data.results);
+          gMap.addMarkers([{lat: location.lat, lng: location.lng}])
 
-        this.address = data.results[0];
-        this.renderAddress();
-      })
+          this.address = data.results[0];
+          this.renderAddress();
+        })
+        .catch()
     } else if (e.key === 'Escape') {
       this.clear(input)
     }

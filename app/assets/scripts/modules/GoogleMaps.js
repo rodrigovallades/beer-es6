@@ -58,11 +58,8 @@ class GoogleMaps {
     });
   }
 
-  getAddressLocation() {
-    let address = document.getElementById('search_address').value;
-    if (address) {
-      return fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o&address=${address}`)
-    }
+  getAddressLocation(address) {
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o&address=${address}`)
   }
 }
 
