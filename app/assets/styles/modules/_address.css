@@ -1,5 +1,24 @@
 .address {
   padding: 0 20px 20px 20px;
+  position: relative;
+
+  &__get-beers {
+    display: block;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    border: 1px solid $subtleGrey;
+    border-radius: $borderRadius;
+    padding: 0 10px;
+    margin-top: -20px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $subtleGrey;
+    }
+  }
 
   &__title {
     text-transform: uppercase;
@@ -49,13 +68,13 @@
     border-radius: $borderRadius;
     font-size: 1.2rem;
     line-height: 1.4em;
-    padding: 1em 1em 1em 35px;
+    padding: 1em 130px 1em 45px;
   }
 
   &__list-item::before {
     font-size: 1.3rem;
     display: block;
-    width: 35px;
+    width: 45px;
     height: 35px;
     line-height: 35px;
     text-align: center;
