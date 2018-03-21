@@ -60,6 +60,11 @@
   &__list {
     list-style: none;
     padding: 0;
+    margin-bottom: 0;
+
+    @mixin atMedium {
+      margin: 16px 0;
+    }
   }
 
   &__list-item {

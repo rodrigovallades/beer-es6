@@ -106,11 +106,14 @@ class BeerLocator {
 
   renderProducts(products) {
     let productsHtml = '';
-
     products.map(product => {
       let p = product.productVariants[0];
       productsHtml += `
-        <div class='products__item'>${p.title}</div>
+        <div class='products__item'>
+          <div class='product__image'><img src='${p.imageUrl}' /></div>
+          <div class='product__title'>${p.title}</div>
+          <div class='product__price'>R$ ${p.price}</div>
+        </div>
       `;
     });
 
