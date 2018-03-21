@@ -36,6 +36,12 @@ router
   .addRoute('products', {
     templateUrl: 'views/products.html', // is loaded and gets rendered
     routeHandler: (domEntryPoint, routeParams) => {
+
+			if (!window.BeerLocator.pocSearch.id) {
+				router.navigateTo('home');
+				return
+			}
+
       BeerLocator.productsList = document.querySelector('products');
       loader.block();
       // fetch GraphQL products api
