@@ -9,6 +9,7 @@ const query = new Queries();
 const router = createRouter(document.getElementById('app'));
 const BeerLocator = new BeerService();
 const gMap = new GoogleMaps();
+gMap.init();
 
 // accessible in the HTML
 window.BeerLocator = BeerLocator;
@@ -23,7 +24,7 @@ router
 	.addRoute('home', {
 		templateUrl: 'views/home.html', // is loaded and gets rendered
 		routeHandler: (domEntryPoint, routeParams) => {
-      gMap.init();
+			gMap.initMap();
       BeerLocator.addressResults = document.querySelector('addressresults');
       BeerLocator.addressResults.addEventListener('click', function(e) {
           if (e.target.classList.contains('address__get-beers')) {
