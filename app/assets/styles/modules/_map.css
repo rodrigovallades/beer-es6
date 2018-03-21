@@ -1,9 +1,8 @@
-#map {
+googlemaps {
   display: block;
   height: 300px;
 
   @mixin atMedium {
-    min-height: 100%;
-    height: 600px;
+    height: 70vh;
   }
 }

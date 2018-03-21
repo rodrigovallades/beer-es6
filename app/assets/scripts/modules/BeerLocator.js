@@ -11,8 +11,8 @@ class BeerLocator {
   constructor() {
     this.address = {};
     this.pocSearch = {};
-    this.addressResults = document.querySelector('.address__results');
-    this.productsList = document.querySelector('.products');
+    this.addressResults = document.querySelector('addressresults');
+    this.productsList = document.querySelector('products');
   }
 
   searchHandler(e, input) {

@@ -8,7 +8,7 @@ class GoogleMaps {
   }
 
   init() {
-    if (document.querySelectorAll('#map').length > 0) {
+    if (document.querySelectorAll('googlemaps').length > 0) {
       let js_file = document.createElement('script');
       js_file.type = 'text/javascript';
       js_file.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAFGFzc9BcMwW9UT2N5mYj9PeT4bXs8a6o&callback=initMap';
@@ -17,7 +17,7 @@ class GoogleMaps {
   }
 
   initMap(options) {
-    this.map = new google.maps.Map(document.getElementById('map'), this.initOptions);
+    this.map = new google.maps.Map(document.querySelector('googlemaps'), this.initOptions);
   }
 
   initBrazil() {
