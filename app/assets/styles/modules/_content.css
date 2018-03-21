@@ -1,10 +1,12 @@
-.content {
+.flex-content {
 
   @mixin atMedium {
     display: flex;
-    flex-direction: row;    
+    flex-direction: row;
   }
+}
 
+.content {
   &__column--smaller {
     flex: 3 0 0;
   }
