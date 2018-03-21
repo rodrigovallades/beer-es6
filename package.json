@@ -8,7 +8,8 @@
     "build": "gulp build"
   },
   "dependencies": {
-    "normalize.css": "^4.1.1"
+    "normalize.css": "^4.1.1",
+    "vanilla-ui-router": "^1.2.2"
   },
   "devDependencies": {
     "apollo-fetch": "^0.7.0",
