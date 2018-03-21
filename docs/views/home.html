@@ -1,0 +1,16 @@
+<div class="header">BeerLocator [Rodrigo Vallades]</div>
+<div class="content">
+  <div class="content__column content__column--smaller">
+    <div class="address">
+      <label class="address__title" for="search_address">Delivery Address</label>
+      <div class="address__input-group">
+        <input type="text" name="address" id="search_address" class="address__input" required="" title="" placeholder="Type your address" onkeyup="BeerLocator.searchHandler(event, this)" />
+      </div>
+      <addressresults></addressresults>
+    </div>
+  </div>
+  <div class="content__column content__column--bigger">
+    <googlemaps></googlemaps>
+  </div>
+</div>
+<div class="footer">Rodrigo Vallades [rodrigo.vallades@gmail.com]</div>
