@@ -90,7 +90,7 @@ class BeerLocator {
     if (showBuy) {
       template = `
         <ul class='address__list'>
-          <li class='address__list-item'>${message}<span class="address__get-beers">Get beers</span></li>
+          <li class='address__list-item'>${message}<span class="btn btn--dark address__get-beers">Get beers</span></li>
         </ul>
       `;
     } else {
@@ -110,7 +110,7 @@ class BeerLocator {
       productsHtml += `
         <div class='products__item'>
           <div class='product__title'>${p.title}</div>
-          <div class='product__image'><img src='${p.imageUrl}' /></div>          
+          <div class='product__image'><img src='${p.imageUrl}' /></div>
           <div class='product__price'>R$ ${p.price}</div>
         </div>
       `;

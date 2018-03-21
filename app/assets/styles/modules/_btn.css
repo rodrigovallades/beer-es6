@@ -1,0 +1,33 @@
+.btn {
+  display: block;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: $borderRadius;
+  padding: 0 10px;
+  margin-top: -20px;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+
+  &--dark {
+    background-color: $darkGrey;
+    color: $verySubtleGrey;
+
+    &:hover {
+      background-color: $mainAccentContrast;
+    }
+  }
+
+  &--light {
+    border-color: $subtleGrey;
+
+    &:hover {
+      background-color: $verySubtleGrey;
+    }
+  }
+
+
+}

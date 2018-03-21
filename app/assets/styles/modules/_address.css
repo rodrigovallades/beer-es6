@@ -1,25 +1,7 @@
 .address {
   padding: 0 20px 20px 20px;
   position: relative;
-
-  &__get-beers {
-    display: block;
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    border: 1px solid $subtleGrey;
-    border-radius: $borderRadius;
-    padding: 0 10px;
-    margin-top: -20px;
-    height: 40px;
-    line-height: 40px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: $subtleGrey;
-    }
-  }
-
+  
   &__title {
     text-transform: uppercase;
     font-weight: 600;

@@ -3,8 +3,6 @@
 @import "base/_mixins";
 @import "base/_global";
 
-@import "modules/layout/_wrapper";
-
 @import "modules/_app";
 @import "modules/_header";
 @import "modules/_content";
@@ -13,3 +11,4 @@
 @import "modules/_products";
 @import "modules/_map";
 @import "modules/_loader";
+@import "modules/_btn";
