@@ -1,0 +1,19 @@
+.cart {
+  margin-left: auto;
+
+  &__title {
+    display: inline-block;
+    background-color: $mainAccent;
+    color: $mainAccentContrast;
+    font-size: 1.2rem;
+    border-radius: $borderRadius;
+    padding: 0 5px;    
+  }
+  &__total {
+    font-size: 1.2rem;
+  }
+  &__value {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}

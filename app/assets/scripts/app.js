@@ -25,8 +25,9 @@ router
 	.addRoute('', () => {
 		router.navigateTo('home');
 	})
+	// Home
 	.addRoute('home', {
-		templateUrl: 'views/home.html', // is loaded and gets rendered
+		templateUrl: 'views/home.html',
 		routeHandler: (domEntryPoint, routeParams) => {
 			gMap.initMap();
       BeerLocator.addressResultsDom = document.querySelector('addressresults');
@@ -37,9 +38,12 @@ router
       });
 		}
 	})
+	// Products
   .addRoute('products', {
-    templateUrl: 'views/products.html', // is loaded and gets rendered
+    templateUrl: 'views/products.html',
     routeHandler: (domEntryPoint, routeParams) => {
+
+			products.renderCart();
 
       BeerLocator.productsListDom = document.querySelector('products');
 			BeerLocator.productsListDom.addEventListener('click', e => {
