@@ -1,7 +1,11 @@
 .app {
   display: block;
   height: 100%;
-  
+
   @mixin atMedium {
   }
+}
+
+#app {
+  padding-top: 100px;
 }
