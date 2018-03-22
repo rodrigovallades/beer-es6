@@ -11,8 +11,8 @@ class BeerLocator {
   constructor() {
     this.address = {};
     this.pocSearch = {};
-    this.addressResults = '';
-    this.productsList = '';
+    this.addressResultsDom = '';
+    this.productsListDom = '';
   }
 
   searchHandler(e, input) {
@@ -77,12 +77,12 @@ class BeerLocator {
 
   clearAddress() {
     console.log(`[Address cleared]`);
-    this.addressResults.innerHTML = ``;
+    this.addressResultsDom.innerHTML = ``;
   }
 
   clearProducts() {
     console.log(`[Products cleared]`);
-    this.productsList.innerHTML = ``;
+    this.productsListDom.innerHTML = ``;
   }
 
   renderAddress(message, showBuy) {
@@ -100,23 +100,28 @@ class BeerLocator {
         </ul>
       `;
     }
-    this.addressResults.innerHTML = template;
+    this.addressResultsDom.innerHTML = template;
   }
 
   renderProducts(products) {
     let productsHtml = '';
-    products.map(product => {
+    products.map((product, index) => {
       let p = product.productVariants[0];
       productsHtml += `
-        <div class='products__item'>
+        <div class='products__item' data-id='${index}'>
           <div class='product__title'>${p.title}</div>
           <div class='product__image'><img src='${p.imageUrl}' /></div>
           <div class='product__price'>R$ ${p.price}</div>
+          <div class='product__controls'>
+            <div class='btn btn--light product__remove' data-id='${index}'>-</div>
+            <div class='product__quantity products__quantity--id${index}'>0</div>
+            <div class='btn btn--light product__add' data-id='${index}'>+</div>
+          </div>
         </div>
       `;
     });
 
-    this.productsList.innerHTML = productsHtml;
+    this.productsListDom.innerHTML = productsHtml;
   }
 
 }

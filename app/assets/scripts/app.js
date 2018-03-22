@@ -2,6 +2,7 @@ import GoogleMaps from './modules/GoogleMaps';
 import Loader from './modules/Loader';
 import Queries from './modules/Queries';
 import BeerService from './modules/BeerLocator'
+import Products from './modules/Products'
 import { createRouter } from 'vanilla-ui-router';
 
 const loader = new Loader();
@@ -9,6 +10,7 @@ const query = new Queries();
 const router = createRouter(document.getElementById('app'));
 const BeerLocator = new BeerService();
 const gMap = new GoogleMaps();
+const products = new Products();
 gMap.init();
 
 // accessible in the HTML
@@ -17,6 +19,8 @@ window.gMap = gMap;
 window.initOptions = gMap.initOptions;
 window.initMap = gMap.initMap;
 
+
+// Routes
 router
 	.addRoute('', () => {
 		router.navigateTo('home');
@@ -25,8 +29,8 @@ router
 		templateUrl: 'views/home.html', // is loaded and gets rendered
 		routeHandler: (domEntryPoint, routeParams) => {
 			gMap.initMap();
-      BeerLocator.addressResults = document.querySelector('addressresults');
-      BeerLocator.addressResults.addEventListener('click', function(e) {
+      BeerLocator.addressResultsDom = document.querySelector('addressresults');
+      BeerLocator.addressResultsDom.addEventListener('click', e => {
           if (e.target.classList.contains('address__get-beers')) {
             router.navigateTo('products');
           }
@@ -37,15 +41,20 @@ router
     templateUrl: 'views/products.html', // is loaded and gets rendered
     routeHandler: (domEntryPoint, routeParams) => {
 
-			if (!window.BeerLocator.pocSearch.id) {
-				router.navigateTo('home');
-				return
-			}
-
-      BeerLocator.productsList = document.querySelector('products');
+      BeerLocator.productsListDom = document.querySelector('products');
+			BeerLocator.productsListDom.addEventListener('click', e => {
+					// add product
+          if (e.target.classList.contains('product__add')) {
+						products.add(e.target.dataset.id);
+          }
+					// remove product
+					if (e.target.classList.contains('product__remove')) {
+						products.remove(e.target.dataset.id);
+          }
+      });
       loader.block();
       // fetch GraphQL products api
-      query.getBeers(window.BeerLocator.pocSearch.id)
+      query.getBeers(window.BeerLocator.pocSearch.id = '242')
         .then(res => {
           loader.unblock();
           if (res.data.poc.products.length) {
