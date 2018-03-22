@@ -1,6 +1,19 @@
 .address {
-  padding: 0 20px 20px 20px;
-  position: relative;
+  padding: 0 15px 15px 15px;
+
+  @mixin atMedium {
+    padding: 0 20px 20px 20px;
+    position: absolute;
+    z-index: 2;
+    background-color: $lightFrame;
+    border: 1px solid $verySubtleGrey;
+    border-radius: $borderRadius;
+    top: 10%;
+    left: 10%;
+    max-width: 30%;
+    min-width: 400px;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,.35);
+  }
 
   &__get-beers {
     display: block;
@@ -19,13 +32,19 @@
 
   &__input {
     width: 100%;
-    line-height: 3em;
+    line-height: 2.8em;
     border: 1px solid $subtleGrey;
     border-radius: $borderRadius;
     color: $mainFont;
     padding: 0 20px 0 50px;
-    font-size: 1.35rem;
+    font-size: 1.2rem;
     outline: none;
+
+    @mixin atMedium {
+      line-height: 3em;
+      font-size: 1.35rem;
+    }
+
   }
 
   &__input-group {
@@ -51,19 +70,20 @@
     list-style: none;
     padding: 0;
     margin-bottom: 0;
-
-    @mixin atMedium {
-      margin: 16px 0;
-    }
   }
 
   &__list-item {
     position: relative;
     background-color: $verySubtleGrey;
     border-radius: $borderRadius;
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 1.4em;
-    padding: 1em 130px 1em 45px;
+    padding: 10px 130px 10px 45px;
+
+      @mixin atMedium {
+        line-height: 1.4em;
+        padding: 1em 130px 1em 45px;
+      }
   }
 
   &__list-item--error {
