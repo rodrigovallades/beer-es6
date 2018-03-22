@@ -43,6 +43,7 @@ router
 
       BeerLocator.productsListDom = document.querySelector('products');
 			BeerLocator.productsListDom.addEventListener('click', e => {
+					if (!e.isTrusted || !e.clientX || !e.clientY) return
 					// add product
           if (e.target.classList.contains('product__add')) {
 						products.add(e.target.dataset.id);
