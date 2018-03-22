@@ -90,13 +90,16 @@ class BeerLocator {
     if (showBuy) {
       template = `
         <ul class='address__list'>
-          <li class='address__list-item'>${message}<span class="btn btn--dark address__get-beers">Get beers</span></li>
+          <li class='address__list-item'>
+            <span class='address__location'>${message}</span>
+            <span class='btn btn--dark address__get-beers'></span>
+          </li>
         </ul>
       `;
     } else {
       template = `
         <ul class='address__list'>
-          <li class='address__list-item address__list-item--error'>${message}</li>
+          <li class='address__list-item address__list-item--error'><span>${message}</span></li>
         </ul>
       `;
     }
