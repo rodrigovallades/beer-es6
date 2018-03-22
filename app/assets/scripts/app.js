@@ -29,7 +29,10 @@ router
 	.addRoute('home', {
 		templateUrl: 'views/home.html',
 		routeHandler: (domEntryPoint, routeParams) => {
+
 			gMap.initMap();
+			products.removeCart();
+
       BeerLocator.addressResultsDom = document.querySelector('addressresults');
       BeerLocator.addressResultsDom.addEventListener('click', e => {
           if (e.target.classList.contains('address__get-beers')) {
@@ -42,6 +45,11 @@ router
   .addRoute('products', {
     templateUrl: 'views/products.html',
     routeHandler: (domEntryPoint, routeParams) => {
+
+			if (!window.BeerLocator.pocSearch.id) {
+				router.navigateTo('home')
+				return
+			};
 
 			products.renderCart();
 
@@ -59,7 +67,7 @@ router
       });
       loader.block();
       // fetch GraphQL products api
-      query.getBeers(window.BeerLocator.pocSearch.id = '242')
+      query.getBeers(window.BeerLocator.pocSearch.id)
         .then(res => {
           loader.unblock();
           if (res.data.poc.products.length) {

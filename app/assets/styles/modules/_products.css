@@ -74,3 +74,13 @@ products.flex-content {
   border-radius: $borderRadius;
   margin: 0 5px;
 }
+  .product__quantity > input {
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    text-align: center;
+    line-height: 37px;
+    /* height: 34px; */
+    border: 0;
+    outline: none;
+  }
