@@ -111,10 +111,10 @@ class BeerLocator {
         <div class='products__item' data-id='${index}'>
           <div class='product__title'>${p.title}</div>
           <div class='product__image'><img src='${p.imageUrl}' /></div>
-          <div class='product__price'>R$ ${p.price}</div>
+          <div class='product__price'>R$ <span class='product__value product__value--id${index}'>${p.price}</span></div>
           <div class='product__controls'>
             <div class='btn btn--light product__remove' data-id='${index}'>-</div>
-            <div class='product__quantity products__quantity--id${index}'>0</div>
+            <div class='product__quantity product__quantity--id${index}'>0</div>
             <div class='btn btn--light product__add' data-id='${index}'>+</div>
           </div>
         </div>
