@@ -11,12 +11,12 @@
   position: fixed;
 
   @mixin atMedium {
-    padding: 0 3rem;
+    padding: 0 8rem;
     font-size: 1.6rem;
   }
 
   @mixin atLarge {
-    padding: 0 12rem;
+    padding: 0 20rem;
   }
 
   &::before {
