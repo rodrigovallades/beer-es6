@@ -99,6 +99,10 @@
     flex: 1
   }
 
+  &__try {
+    margin-bottom: 0;
+  }
+
   &__list-item--error {
     background-color: $subtleErrorBg;
   }
