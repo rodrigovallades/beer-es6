@@ -38,8 +38,8 @@ gulp.task('copyGeneralFiles', ['deleteDistFolder'], function() {
 gulp.task('usemin', ['deleteDistFolder', 'styles', 'scripts'], function() {
   return gulp.src("./app/index.html")
     .pipe(usemin({
-      css: [function() {return rev()}, function() {return cssnano()}],
-      js: [function() {return rev()}, function() {return uglify()}]
+      css: [ cssnano(), rev() ],
+      js: [ rev() ]      
     }))
     .pipe(gulp.dest("./docs"));
 });
